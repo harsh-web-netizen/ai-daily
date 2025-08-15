@@ -3,11 +3,11 @@ name: Build AI Digest
 on:
   push:
     branches:
-      - main             # Runs whenever you push to main
+      - main
   schedule:
     - cron: '30 3 * * *' # 9:00 AM IST
     - cron: '30 9 * * *' # 3:00 PM IST
-  workflow_dispatch:      # Allow manual runs too
+  workflow_dispatch:
 
 jobs:
   build:
@@ -46,5 +46,6 @@ jobs:
           echo "No changes to commit. Skipping push."
         else
           git commit -m "Update AI Digest"
+          git pull --rebase origin main
           git push origin main
         fi
