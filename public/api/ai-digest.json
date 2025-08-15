@@ -1,0 +1,30 @@
+[
+  {
+    "id": "sample-1",
+    "title": "Sample AI Article",
+    "url": "https://example.com/ai-article",
+    "description": "A sample article about AI.",
+    "source": "Tech Blog",
+    "author": "Author",
+    "published_at": "2025-08-14T09:00:00.000Z",
+    "type": "article",
+    "tags": [
+      "ai",
+      "ml"
+    ]
+  },
+  {
+    "id": "sample-2",
+    "title": "Sample AI Podcast",
+    "url": "https://example.com/ai-podcast",
+    "description": "A sample podcast episode.",
+    "source": "Podcast Network",
+    "author": "Host",
+    "published_at": "2025-08-14T07:00:00.000Z",
+    "type": "podcast",
+    "tags": [
+      "podcast",
+      "agents"
+    ]
+  }
+]
