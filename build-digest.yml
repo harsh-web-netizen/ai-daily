@@ -1,0 +1,19 @@
+name: Build AI Digest
+on:
+  schedule:
+    # 23:00 UTC is 04:30 IST next day; tweak if you want
+    - cron: "0 23 * * *"
+  workflow_dispatch: {}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run build:digest
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update ai-digest.json"
