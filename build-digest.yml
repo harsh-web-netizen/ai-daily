@@ -1,43 +1,54 @@
-name: AI Digest Updater
+name: Build AI Digest
 
 on:
   schedule:
-    # 9 AM IST = 3:30 AM UTC, 3 PM IST = 9:30 AM UTC
-    - cron: '30 3 * * *'
-    - cron: '30 9 * * *'
-  workflow_dispatch:
+    # 9 AM IST → 03:30 UTC
+    - cron: "30 3 * * *"
+    # 3 PM IST → 09:30 UTC
+    - cron: "30 9 * * *"
+  workflow_dispatch: # allows manual run from GitHub Actions tab
 
 jobs:
-  update-ai-digest:
+  build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          python-version: '3.x'
+          node-version: "18"
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: npm install
 
-      - name: Run AI Digest script
-        run: python your_script.py
-        # replace `your_script.py` with your actual script name
+      - name: Run build script
+        run: npm run build
 
-      - name: Commit and push changes (force overwrite)
+      - name: Configure git
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git fetch origin main
-          git checkout main
-          git add .
+
+      - name: Ignore unwanted files
+        run: |
+          echo "node_modules/" >> .gitignore
+          echo "package-lock.json" >> .gitignore
+          git rm -r --cached node_modules/ || true
+          git rm --cached package-lock.json || true
+
+      - name: Commit and push changes
+        run: |
+          git pull --rebase origin main
+          # Add only the files you actually want to update
+          git add index.html data.json
           if git diff --cached --quiet; then
-            echo "No changes to commit. Skipping push."
+            echo "No changes to commit."
           else
             git commit -m "Update AI Digest"
-            git push origin main --force
+            git push origin main
           fi
