@@ -1,7 +1,13 @@
 name: Build AI Digest
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main             # Runs whenever you push to main
+  schedule:
+    - cron: '30 3 * * *' # 9:00 AM IST
+    - cron: '30 9 * * *' # 3:00 PM IST
+  workflow_dispatch:      # Allow manual runs too
 
 jobs:
   build:
@@ -11,7 +17,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
-        fetch-depth: 0  # ensures full git history so pull works properly
+        fetch-depth: 0
+        ref: main
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -27,11 +34,17 @@ jobs:
       run: |
         python build_ai_digest.py
 
-    - name: Commit and push changes
+    - name: Commit and push changes if any
       run: |
         git config --global user.name 'github-actions[bot]'
         git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git fetch origin main
+        git checkout main
+        git reset --hard origin/main
         git add .
-        git commit -m "Update AI Digest" || echo "No changes to commit"
-        git pull origin main --rebase
-        git push origin main
+        if git diff --cached --quiet; then
+          echo "No changes to commit. Skipping push."
+        else
+          git commit -m "Update AI Digest"
+          git push origin main
+        fi
