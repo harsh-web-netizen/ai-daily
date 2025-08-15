@@ -1,30 +1,13 @@
 [
   {
-    "id": "sample-1",
-    "title": "Sample AI Article",
-    "url": "https://example.com/ai-article",
-    "description": "A sample article about AI.",
-    "source": "Tech Blog",
-    "author": "Author",
-    "published_at": "2025-08-14T09:00:00.000Z",
-    "type": "article",
-    "tags": [
-      "ai",
-      "ml"
-    ]
-  },
-  {
-    "id": "sample-2",
-    "title": "Sample AI Podcast",
-    "url": "https://example.com/ai-podcast",
-    "description": "A sample podcast episode.",
-    "source": "Podcast Network",
-    "author": "Host",
-    "published_at": "2025-08-14T07:00:00.000Z",
-    "type": "podcast",
-    "tags": [
-      "podcast",
-      "agents"
-    ]
+    "id": "27d5482eebd075de44389774fce28c69f45c8a75",
+    "title": "A Survey of Optimization Modeling Meets LLMs: Progress and Future Directions",
+    "url": "h",
+    "description": "arXiv:2508.10047v1 Announce Type: new Abstract: By virtue of its great utility in solving real-world problems, optimization modeling has been widely employed for optimal decision-making across various sectors, but it requires substantial expertise from operations research profess",
+    "source": "arXiv cs.AI",
+    "author": "Ziyang Xiao, Jingrong Xie, Lilin Xu, Shisi Guan, Jingyan Zhu, Xiongwei Han, Xiaojin Fu, WingYin Yu, Han Wu, Wei Shi, Qingcan Kang, Jiahui Duan, Tao Zhong, Mingxuan Yuan, Jia Zeng, Yuan Wang, Gang Chen, Dongxiang Zhang",
+    "published_at": "2025-08-15T04:00:00.000Z",
+    "type": "research",
+    "tags": []
   }
 ]
